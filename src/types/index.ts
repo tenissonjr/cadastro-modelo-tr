@@ -1,12 +1,12 @@
 export interface Attribute {
-  id: string
+  id: number
   name: string
-  categoryId: string
+  categoryId: number
   selected: boolean
 }
 
 export interface Category {
-  id: string
+  id: number
   name: string
   icon: string
   expanded: boolean

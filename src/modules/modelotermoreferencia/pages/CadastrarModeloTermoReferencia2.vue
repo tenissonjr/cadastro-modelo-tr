@@ -56,8 +56,8 @@
       </div>
 
       <!-- Accordion -->
-      <div class="accordion-container">
-        <cadastro-modelo-termo-referencia-atributos v-for="category in store.visibleCategories" :key="category.id"
+    <app-accordion :value="0">     
+        <cadastro-modelo-termo-referencia-atributos2 v-for="category in store.visibleCategories" :key="category.id"
           :category="category" :attributes="store.getAttributesByCategory(category.id)"
           :visible-attributes="store.getVisibleAttributesByCategory(category.id)"
           :selected-count="store.getSelectedCountByCategory(category.id)"
@@ -65,7 +65,9 @@
           :visible-count="store.getVisibleCountByCategory(category.id)"
           :is-visible="store.isCategoryVisible(category.id)" :search-query="store.searchQuery"
           @toggle-category="store.toggleCategory" @toggle-attribute="store.toggleAttribute" />
-      </div>
+    </app-accordion>
+
+
 
       <!-- No Results -->
       <div v-if="store.visibleCategories.length === 0" class="no-categories">
@@ -75,6 +77,7 @@
         </button>
       </div>
     </div>
+
 
     <!-- Actions -->
     <div class="actions">
@@ -92,10 +95,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import CadastroModeloTermoReferenciaAtributos2 from '@/modules/modelotermoreferencia/components/CadastroModeloTermoReferenciaAtributos2.vue';
+import cadastroModeloTermoReferenciaFiltroAtributos from '@/modules/modelotermoreferencia/components/CadastroModeloTermoReferenciaFiltroAtributos.vue';
 import { useAttributeStore } from '@/stores/attributeStore';
-import cadastroModeloTermoReferenciaFiltroAtributos from '@/components/CadastroModeloTermoReferenciaFiltroAtributos.vue';
-import cadastroModeloTermoReferenciaAtributos from '@/components/CadastroModeloTermoReferenciaAtributos.vue';
+import { computed, ref } from 'vue';
 
 const store = useAttributeStore();
 const areAllExpanded = ref(true);

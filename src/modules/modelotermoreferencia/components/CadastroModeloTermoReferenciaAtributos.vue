@@ -44,15 +44,15 @@ interface Props {
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
-    'toggle-category': [id: string];
-    'toggle-attribute': [id: string];
+    'toggle-category': [id: number];
+    'toggle-attribute': [id: number];
 }>();
 
 const handleToggle = () => {
     emit('toggle-category', props.category.id);
 };
 
-const handleAttributeToggle = (id: string) => {
+const handleAttributeToggle = (id: number) => {
     emit('toggle-attribute', id);
 };
 </script>

@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const emit = defineEmits<{
-    toggle: [id: string]
+    toggle: [id: number]
 }>();
 
 const handleToggle = () => {
