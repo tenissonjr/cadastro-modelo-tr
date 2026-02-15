@@ -46,7 +46,7 @@
       </div>
 
       <!-- Filter -->
-      <cadastro-modelo-termo-referencia-filtro-atributos v-model="store.tipoFiltroAtributo" :totalAtributos="store.totalAtributos"
+      <atualizacao-modelo-termo-referencia-form-filtro-atributos v-model="store.tipoFiltroAtributo" :totalAtributos="store.totalAtributos"
         :atributosSelecionados="store.totalAtributosSelecionados" 
         :atributosNaoSelecionados="store.totalAtributosNaoSelecionados"
         @toggle-all="toggleAttributes" />
@@ -58,7 +58,7 @@
 
       <!-- Accordion -->
       <div class="accordion-container">
-        <cadastro-modelo-termo-referencia-atributos v-for="agrupamento in store.agrupamentosVisiveis" :key="agrupamento.id"
+        <atualizacao-modelo-termo-referencia-form-agrupamentos v-for="agrupamento in store.agrupamentosVisiveis" :key="agrupamento.id"
           :agrupamentos="agrupamento"
           :atributosVisiveis="store.getAtributosVisiveisPorAgrupamento(agrupamento.id)"
           :totalAtributosSelecionados="store.getAtributosSelecionadosPorAgrupamento(agrupamento.id)"
@@ -94,8 +94,8 @@
 </template>
 
 <script setup lang="ts">
-import CadastroModeloTermoReferenciaAtributos from '@/modules/modelotermoreferencia/components/CadastroModeloTermoReferenciaAtributos.vue';
-import cadastroModeloTermoReferenciaFiltroAtributos from '@/modules/modelotermoreferencia/components/CadastroModeloTermoReferenciaFiltroAtributos.vue';
+import AtualizacaoModeloTermoReferenciaFormAgrupamentos from '@/modules/modelotermoreferencia/components/AtualizacaoModeloTermoReferenciaFormAgrupamentos.vue';
+import AtualizacaoModeloTermoReferenciaFormFiltroAtributos from '@/modules/modelotermoreferencia/components/AtualizacaoModeloTermoReferenciaFormFiltroAtributos.vue';
 import { useAtualizacaoAtributosModeloTermoReferenciaStore } from '@/stores/AtualizacaoAtributosModeloTermoReferenciaStore';
 import { computed, ref } from 'vue';
 

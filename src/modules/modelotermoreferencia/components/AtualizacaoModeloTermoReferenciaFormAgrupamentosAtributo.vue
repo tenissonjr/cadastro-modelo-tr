@@ -1,7 +1,7 @@
 <template>
     <div class="attribute-item">
-        <input :id="`attr-${attribute.id}`" type="checkbox" :checked="attribute.selecionado" @change="handleToggle">
-        <label :for="`attr-${attribute.id}`" class="attribute-label" v-html="highlightedName"></label>
+        <input :id="`attr-${atributo.id}`" type="checkbox" :checked="atributo.selecionado" @change="handleToggle">
+        <label :for="`attr-${atributo.id}`" class="attribute-label" v-html="highlightedName"></label>
     </div>
 </template>
 
@@ -10,12 +10,12 @@ import { computed } from 'vue';
 import type { ITipoCapituloDTO } from '@/types';
 
 interface Props {
-    attribute: ITipoCapituloDTO;
-    searchQuery?: string;
+    atributo: ITipoCapituloDTO;
+    descricaoPesquisa?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    searchQuery: ''
+    descricaoPesquisa: ''
 });
 
 const emit = defineEmits<{
@@ -23,16 +23,16 @@ const emit = defineEmits<{
 }>();
 
 const handleToggle = () => {
-    emit('toggle', props.attribute.id);
+    emit('toggle', props.atributo.id);
 };
 
 const highlightedName = computed(() => {
-    if (!props.searchQuery) {
-        return props.attribute.descricao;
+    if (!props.descricaoPesquisa) {
+        return props.atributo.descricao;
     }
 
-    const regex = new RegExp(`(${props.searchQuery})`, 'gi');
-    return props.attribute.descricao.replace(
+    const regex = new RegExp(`(${props.descricaoPesquisa})`, 'gi');
+    return props.atributo.descricao.replace(
         regex,
         '<span class="search-highlight">$1</span>'
     );

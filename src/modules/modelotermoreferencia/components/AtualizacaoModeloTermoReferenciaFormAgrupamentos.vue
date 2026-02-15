@@ -16,8 +16,8 @@
             </div>
         </div>
         <div v-show="agrupamentos.expanded" class="accordion-content">
-            <cadastro-modelo-termo-referencia-atributos-item v-for="attr in atributosVisiveis" :key="attr.id"
-                :attribute="attr" :search-query="descricaoPesquisa" @toggle="handleAttributeToggle" />
+            <atualizacao-modelo-termo-referencia-form-agrupamentos-atributo v-for="attr in atributosVisiveis" :key="attr.id"
+                :atributo="attr" :descricaoPesquisa="descricaoPesquisa" @toggle="handleAttributeToggle" />
             <div v-if="atributosVisiveis.length === 0" class="no-results">
                 Nenhum atributo encontrado
             </div>
@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import CadastroModeloTermoReferenciaAtributosItem from './CadastroModeloTermoReferenciaAtributosItem.vue';
+import AtualizacaoModeloTermoReferenciaFormAgrupamentosAtributo from './AtualizacaoModeloTermoReferenciaFormAgrupamentosAtributo.vue';
 import type { IAgrupamentoAtributoDTO, ITipoCapituloDTO } from '@/types';
 
 interface Props {
