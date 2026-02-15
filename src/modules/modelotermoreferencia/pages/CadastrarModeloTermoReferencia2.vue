@@ -109,13 +109,13 @@ function toggleAttributes() {
 }
 
 const showInfoMessage = computed(() => {
-  return store.filterType !== 'all';
+  return store.filterType !== 'todos';
 });
 
 const infoMessage = computed(() => {
-  if (store.filterType === 'selected') {
+  if (store.filterType === 'selecionados') {
     return `ℹ️ Exibindo apenas atributos selecionados (${store.totalSelected})`;
-  } else if (store.filterType === 'unselected') {
+  } else if (store.filterType === 'naoSelecionados') {
     return `ℹ️ Exibindo apenas atributos não selecionados (${store.totalUnselected})`;
   }
   return '';
@@ -123,7 +123,7 @@ const infoMessage = computed(() => {
 
 const resetFilters = () => {
   store.clearSearch();
-  store.setFilterType('all');
+  store.setFilterType('todos');
 };
 
 const handleSubmit = () => {

@@ -12,7 +12,7 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
   const searchQuery = ref('')
   const filterType = ref<FilterType>('todos')
 
-  const categories = ref<IAgrupamentoAtributoDTO[]>([
+  const agrupamentos = ref<IAgrupamentoAtributoDTO[]>([
     {
       id: 1,
       descricao: 'Informações Iniciais',
@@ -96,7 +96,7 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
   ])
 
   const attributes = computed<ITipoCapituloDTO[]>(() => {
-    return categories.value.flatMap((category) => category.attributes)
+    return agrupamentos.value.flatMap((category) => category.attributes)
   })
 
   // Getters
@@ -107,7 +107,7 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
   const totalUnselected = computed(() => totalAttributes.value - totalSelected.value)
 
   const getAttributesByCategory = (categoryId: number) => {
-    const category = categories.value.find((cat) => cat.id === categoryId)
+    const category = agrupamentos.value.find((cat) => cat.id === categoryId)
     return category ? category.attributes : []
   }
 
@@ -147,12 +147,12 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
   }
 
   const visibleCategories = computed(() => {
-    return categories.value.filter((cat) => isCategoryVisible(cat.id))
+    return agrupamentos.value.filter((cat) => isCategoryVisible(cat.id))
   })
 
   // Actions
   const toggleAttribute = (attributeId: number) => {
-    for (const category of categories.value) {
+    for (const category of agrupamentos.value) {
       const attr = category.attributes.find((attribute) => attribute.id === attributeId)
       if (attr) {
         attr.selecionado = !attr.selecionado
@@ -162,7 +162,7 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
   }
 
   const toggleCategory = (categoryId: number) => {
-    const category = categories.value.find((c) => c.id === categoryId)
+    const category = agrupamentos.value.find((c) => c.id === categoryId)
     if (category) {
       category.expanded = !category.expanded
       category.icon = category.expanded ? '▼' : '▶'
@@ -170,7 +170,7 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
   }
 
   const toggleAllCategories = (expand: boolean) => {
-    categories.value.forEach((c) => {
+    agrupamentos.value.forEach((c) => {
       c.expanded = expand
       c.icon = expand ? '▼' : '▶'
     })
@@ -193,7 +193,7 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
       titulo: '',
       tipo: 'aquisicao',
     }
-    categories.value.forEach((category) => {
+    agrupamentos.value.forEach((category) => {
       category.attributes.forEach((attr) => {
         attr.selecionado = false
       })
@@ -220,7 +220,7 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
     termoReferencia,
     searchQuery,
     filterType,
-    categories,
+    categories: agrupamentos,
     attributes,
 
     // Getters

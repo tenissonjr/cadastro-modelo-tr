@@ -4,24 +4,24 @@
             <span class="filter-label">Exibir:</span>
 
             <label class="radio-option">
-                <input type="radio" name="filter" value="all" :checked="modelValue === 'all'"
-                    @change="handleChange('all')">
+                <input type="radio" name="filter" value="todos" :checked="modelValue === 'todos'"
+                    @change="handleChange('todos')">
                 <span class="radio-label">
                     Todos atributos <span class="count">({{ totalCount }})</span>
                 </span>
             </label>
 
             <label class="radio-option">
-                <input type="radio" name="filter" value="selected" :checked="modelValue === 'selected'"
-                    @change="handleChange('selected')">
+                <input type="radio" name="filter" value="selecionados" :checked="modelValue === 'selecionados'"
+                    @change="handleChange('selecionados')">
                 <span class="radio-label">
                     Atributos vinculados <span class="count">({{ selectedCount }})</span>
                 </span>
             </label>
 
             <label class="radio-option">
-                <input type="radio" name="filter" value="unselected" :checked="modelValue === 'unselected'"
-                    @change="handleChange('unselected')">
+                <input type="radio" name="filter" value="naoSelecionados" :checked="modelValue === 'naoSelecionados'"
+                    @change="handleChange('naoSelecionados')">
                 <span class="radio-label">
                     Atributos não vinculados <span class="count">({{ unselectedCount }})</span>
                 </span>
