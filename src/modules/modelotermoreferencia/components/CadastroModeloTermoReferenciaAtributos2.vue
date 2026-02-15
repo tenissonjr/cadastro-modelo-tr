@@ -1,18 +1,18 @@
 <template>
     
-      <app-accordion-panel v-if="isVisible" :value="category.id" >
+      <app-accordion-panel v-if="isVisible" :value="agrupamentos.id" >
         <app-accordion-header >
 
             <div class="accordion-title">
-                <span>{{ category.descricao }}</span>
+                <span>{{ agrupamentos.descricao }}</span>
             </div>
             <div class="accordion-badges">
-                <span class="badge badge-total">📊 {{ visibleCount }}{{ visibleCount !== totalCount ? ` de ${totalCount}` : '' }} {{ totalCount === 1 ? 'atributo' : 'atributos' }}</span>
-                <span class="badge badge-selected">✓ {{ selectedCount }}/{{ visibleCount }}</span>
+                <span class="badge badge-total">📊 {{ totalAtributosVisiveis }}{{ totalAtributosVisiveis !== totalAtributos ? ` de ${totalAtributos}` : '' }} {{ totalAtributos === 1 ? 'atributo' : 'atributos' }}</span>
+                <span class="badge badge-selected">✓ {{ totalAtributosSelecionados }}/{{ totalAtributosVisiveis }}</span>
             </div>
         </app-accordion-header>
-        <app-accordion-content v-show="category.expanded" v-for="attr in visibleAttributes" :key="attr.id">
-          <cadastro-modelo-termo-referencia-atributos-item2 :attribute="attr" :search-query="searchQuery" @toggle="handleAttributeToggle" />
+        <app-accordion-content v-show="agrupamentos.expanded" v-for="attr in atributosVisiveis" :key="attr.id">
+          <cadastro-modelo-termo-referencia-atributos-item2 :attribute="attr" :search-query="descricaoPesquisa" @toggle="handleAttributeToggle" />
         </app-accordion-content>
       </app-accordion-panel>
 </template>
@@ -22,28 +22,28 @@ import CadastroModeloTermoReferenciaAtributosItem2 from './CadastroModeloTermoRe
 import type { IAgrupamentoAtributoDTO, ITipoCapituloDTO } from '@/types';
 
 interface Props {
-    category: IAgrupamentoAtributoDTO;
-    visibleAttributes: ITipoCapituloDTO[];
-    selectedCount: number;
-    totalCount: number;
-    visibleCount: number;
+    agrupamentos: IAgrupamentoAtributoDTO;
+    atributosVisiveis: ITipoCapituloDTO[];
+    totalAtributosSelecionados: number;
+    totalAtributos: number;
+    totalAtributosVisiveis: number;
     isVisible: boolean;
-    searchQuery: string;
+    descricaoPesquisa: string;
 }
 
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
-    'toggle-category': [id: number];
-    'toggle-attribute': [id: number];
+    'toggle-agrupamento': [id: number];
+    'toggle-atributo': [id: number];
 }>();
 
 const handleToggle = () => {
-    emit('toggle-category', props.category.id);
+    emit('toggle-agrupamento', props.agrupamentos.id);
 };
 
 const handleAttributeToggle = (id: number) => {
-    emit('toggle-attribute', id);
+    emit('toggle-atributo', id);
 };
 </script>
 

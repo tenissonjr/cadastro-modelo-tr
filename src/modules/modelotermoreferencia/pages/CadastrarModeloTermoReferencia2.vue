@@ -58,12 +58,12 @@
       <!-- Accordion -->
     <app-accordion :value="0">     
         <cadastro-modelo-termo-referencia-atributos2 v-for="agrupamento in store.agrupamentosVisiveis" :key="agrupamento.id"
-          :category="agrupamento"
-          :visible-attributes="store.getAtributosVisiveisPorAgrupamento(agrupamento.id)"
-          :selected-count="store.getAtributosSelecionadosPorAgrupamento(agrupamento.id)"
-          :total-count="store.getTotalAtributosPorAgrupamento(agrupamento.id)"
-          :visible-count="store.getTotalAtributosVisiveisPorAgrupamento(agrupamento.id)"
-          :is-visible="store.isAgrupamentoVisivel(agrupamento.id)" :search-query="store.searchQuery"
+          :agrupamentos="agrupamento"
+          :atributosVisiveis="store.getAtributosVisiveisPorAgrupamento(agrupamento.id)"
+          :totalAtributosSelecionados="store.getAtributosSelecionadosPorAgrupamento(agrupamento.id)"
+          :totalAtributos="store.getTotalAtributosPorAgrupamento(agrupamento.id)"
+          :totalAtributosVisiveis="store.getTotalAtributosVisiveisPorAgrupamento(agrupamento.id)"
+          :is-visible="store.isAgrupamentoVisivel(agrupamento.id)" :descricaoPesquisa="store.searchQuery"
           @toggle-category="store.toggleAgrupamento" @toggle-attribute="store.toggleAtributo" />
     </app-accordion>
 

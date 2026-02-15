@@ -2,23 +2,23 @@
     <div v-if="isVisible" class="accordion-item">
         <div class="accordion-header" @click="handleToggle">
             <div class="accordion-title">
-                <span class="accordion-icon">{{ category.icon }}</span>
-                {{ category.descricao }}
+                <span class="accordion-icon">{{ agrupamentos.icon }}</span>
+                {{ agrupamentos.descricao }}
             </div>
             <div class="accordion-badges">
                 <span class="badge badge-total">
-                    📊 {{ visibleCount }}{{ visibleCount !== totalCount ? ` de ${totalCount}` : '' }}
-                    {{ totalCount === 1 ? 'atributo' : 'atributos' }}
+                    📊 {{ totalAtributosVisiveis }}{{ totalAtributosVisiveis !== totalAtributos ? ` de ${totalAtributos}` : '' }}
+                    {{ totalAtributos === 1 ? 'atributo' : 'atributos' }}
                 </span>
-                <span class="badge badge-selected" :class="{ 'empty': selectedCount === 0 }">
-                    ✓ {{ selectedCount }}/{{ visibleCount }}
+                <span class="badge badge-selected" :class="{ 'empty': totalAtributosSelecionados === 0 }">
+                    ✓ {{ totalAtributosSelecionados }}/{{ totalAtributosVisiveis }}
                 </span>
             </div>
         </div>
-        <div v-show="category.expanded" class="accordion-content">
-            <cadastro-modelo-termo-referencia-atributos-item v-for="attr in visibleAttributes" :key="attr.id"
-                :attribute="attr" :search-query="searchQuery" @toggle="handleAttributeToggle" />
-            <div v-if="visibleAttributes.length === 0" class="no-results">
+        <div v-show="agrupamentos.expanded" class="accordion-content">
+            <cadastro-modelo-termo-referencia-atributos-item v-for="attr in atributosVisiveis" :key="attr.id"
+                :attribute="attr" :search-query="descricaoPesquisa" @toggle="handleAttributeToggle" />
+            <div v-if="atributosVisiveis.length === 0" class="no-results">
                 Nenhum atributo encontrado
             </div>
         </div>
@@ -30,28 +30,28 @@ import CadastroModeloTermoReferenciaAtributosItem from './CadastroModeloTermoRef
 import type { IAgrupamentoAtributoDTO, ITipoCapituloDTO } from '@/types';
 
 interface Props {
-    category: IAgrupamentoAtributoDTO;
-    visibleAttributes: ITipoCapituloDTO[];
-    selectedCount: number;
-    totalCount: number;
-    visibleCount: number;
+    agrupamentos: IAgrupamentoAtributoDTO;
+    atributosVisiveis: ITipoCapituloDTO[];
+    totalAtributosSelecionados: number;
+    totalAtributos: number;
+    totalAtributosVisiveis: number;
     isVisible: boolean;
-    searchQuery: string;
+    descricaoPesquisa: string;
 }
 
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
-    'toggle-category': [id: number];
-    'toggle-attribute': [id: number];
+    'toggle-agrupamento': [id: number];
+    'toggle-atributo': [id: number];
 }>();
 
 const handleToggle = () => {
-    emit('toggle-category', props.category.id);
+    emit('toggle-agrupamento', props.agrupamentos.id);
 };
 
 const handleAttributeToggle = (id: number) => {
-    emit('toggle-attribute', id);
+    emit('toggle-atributo', id);
 };
 </script>
 
@@ -98,6 +98,8 @@ const handleAttributeToggle = (id: number) => {
     display: flex;
     gap: 8px;
     align-items: center;
+    margin-left: auto;
+    justify-content: flex-end;
 }
 
 .badge {
