@@ -120,22 +120,22 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
   }
 
   const getAtributosVisiveisPorAgrupamento = (agrupamentoId: number) => {
-    let attrs = getAtributosPorAgrupamento(agrupamentoId)
+    let atributos = getAtributosPorAgrupamento(agrupamentoId)
 
     // Apply search filter
     if (descricaoPesquisa.value) {
       const query = descricaoPesquisa.value.toLowerCase()
-      attrs = attrs.filter((attr) => attr.descricao.toLowerCase().includes(query))
+      atributos = atributos.filter((attr) => attr.descricao.toLowerCase().includes(query))
     }
 
     // Apply selection filter
     if (tipoFiltroAtributo.value === 'selecionados') {
-      attrs = attrs.filter((attr) => attr.selecionado)
+      atributos = atributos.filter((attr) => attr.selecionado)
     } else if (tipoFiltroAtributo.value === 'naoSelecionados') {
-      attrs = attrs.filter((attr) => !attr.selecionado)
+      atributos = atributos.filter((attr) => !attr.selecionado)
     }
 
-    return attrs
+    return atributos
   }
 
   const getTotalAtributosVisiveisPorAgrupamento = (agrupamentoId: number) => {

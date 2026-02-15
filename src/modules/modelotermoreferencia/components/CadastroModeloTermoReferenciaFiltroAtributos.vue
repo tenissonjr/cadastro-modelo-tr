@@ -7,7 +7,7 @@
                 <input type="radio" name="filter" value="todos" :checked="modelValue === 'todos'"
                     @change="handleChange('todos')">
                 <span class="radio-label">
-                    Todos atributos <span class="count">({{ totalCount }})</span>
+                    Todos atributos <span class="count">({{ totalAtributos }})</span>
                 </span>
             </label>
 
@@ -15,7 +15,7 @@
                 <input type="radio" name="filter" value="selecionados" :checked="modelValue === 'selecionados'"
                     @change="handleChange('selecionados')">
                 <span class="radio-label">
-                    Atributos vinculados <span class="count">({{ selectedCount }})</span>
+                    Atributos vinculados <span class="count">({{ atributosSelecionados }})</span>
                 </span>
             </label>
 
@@ -23,13 +23,13 @@
                 <input type="radio" name="filter" value="naoSelecionados" :checked="modelValue === 'naoSelecionados'"
                     @change="handleChange('naoSelecionados')">
                 <span class="radio-label">
-                    Atributos não vinculados <span class="count">({{ unselectedCount }})</span>
+                    Atributos não vinculados <span class="count">({{ atributosNaoSelecionados }})</span>
                 </span>
             </label>
         </div>
-        <button class="toggle-button" :class="{ 'active': areAllExpanded }" @click="toggleAll">
-            <span class="icon">{{ areAllExpanded ? '🔼' : '🔽' }}</span>
-            <span class="text">{{ areAllExpanded ? 'Recolher Todos' : 'Expandir Todos' }}</span>
+        <button class="toggle-button" :class="{ 'active': isTodosAgrupamentosExpandidos }" @click="toggleAll">
+            <span class="icon">{{ isTodosAgrupamentosExpandidos ? '🔼' : '🔽' }}</span>
+            <span class="text">{{ isTodosAgrupamentosExpandidos ? 'Recolher Todos' : 'Expandir Todos' }}</span>
         </button>
     </div>
 </template>
@@ -40,9 +40,9 @@ import type { TipoFiltroAtributo } from '@/types';
 
 interface Props {
     modelValue: TipoFiltroAtributo;
-    totalCount: number;
-    selectedCount: number;
-    unselectedCount: number;
+    totalAtributos: number;
+    atributosSelecionados: number;
+    atributosNaoSelecionados: number;
 }
 
 const props = defineProps<Props>();
@@ -52,10 +52,10 @@ const emit = defineEmits<{
     'toggle-all': []
 }>();
 
-const areAllExpanded = ref(true);
+const isTodosAgrupamentosExpandidos = ref(true);
 
 const toggleAll = () => {
-    areAllExpanded.value = !areAllExpanded.value;
+    isTodosAgrupamentosExpandidos.value = !isTodosAgrupamentosExpandidos.value;
     emit('toggle-all');
 };
 

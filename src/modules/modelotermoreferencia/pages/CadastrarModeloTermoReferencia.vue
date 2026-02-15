@@ -46,8 +46,9 @@
       </div>
 
       <!-- Filter -->
-      <cadastro-modelo-termo-referencia-filtro-atributos v-model="store.tipoFiltroAtributo" :total-count="store.totalAtributos"
-        :selected-count="store.totalAtributosSelecionados" :unselected-count="store.totalAtributosNaoSelecionados"
+      <cadastro-modelo-termo-referencia-filtro-atributos v-model="store.tipoFiltroAtributo" :totalAtributos="store.totalAtributos"
+        :atributosSelecionados="store.totalAtributosSelecionados" 
+        :atributosNaoSelecionados="store.totalAtributosNaoSelecionados"
         @toggle-all="toggleAttributes" />
 
       <!-- Info Message -->
