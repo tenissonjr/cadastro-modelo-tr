@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { ITipoCapituloDTO, IAgrupamentoAtributoDTO, FilterType, TermoReferencia } from '@/types'
+import type { ITipoCapituloDTO, IAgrupamentoAtributoDTO, TipoFiltroAtributo, TermoReferencia } from '@/types'
 
 export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('useAtualizacaoAtributosModeloTermoReferenciaStore', () => {
   // State
@@ -9,8 +9,8 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
     tipo: 'aquisicao',
   })
 
-  const searchQuery = ref('')
-  const filterType = ref<FilterType>('todos')
+  const descricaoPesquisa = ref('')
+  const tipoFiltroAtributo = ref<TipoFiltroAtributo>('todos')
 
   const agrupamentos = ref<IAgrupamentoAtributoDTO[]>([
     {
@@ -18,7 +18,7 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
       descricao: 'Informações Iniciais',
       icon: '▼',
       expanded: true,
-      attributes: [
+      tiposCapitulo: [
         { id: 1, descricao: 'UNIDADES SUPRIDORAS', selecionado: true },
         { id: 2, descricao: 'JUSTIFICATIVA', selecionado: false },
         { id: 3, descricao: 'DESCRIÇÃO DA DEMANDA', selecionado: false },
@@ -29,7 +29,7 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
       descricao: 'Definição do Objeto',
       icon: '▼',
       expanded: true,
-      attributes: [
+      tiposCapitulo: [
         { id: 4, descricao: 'OBJETO', selecionado: true },
         { id: 5, descricao: 'ESPECIFICAÇÕES TÉCNICAS', selecionado: false },
         { id: 6, descricao: 'QUANTITATIVOS', selecionado: true },
@@ -41,7 +41,7 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
       descricao: 'Fundamentação da Contratação',
       icon: '▼',
       expanded: true,
-      attributes: [
+      tiposCapitulo: [
         { id: 8, descricao: 'JUSTIFICATIVA DA CONTRATAÇÃO', selecionado: true },
         { id: 9, descricao: 'ESTUDOS TÉCNICOS PRELIMINARES', selecionado: false },
         { id: 10, descricao: 'ANÁLISE DE RISCOS', selecionado: false },
@@ -52,7 +52,7 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
       descricao: 'Item - Requisitos',
       icon: '▼',
       expanded: true,
-      attributes: [
+      tiposCapitulo: [
         { id: 11, descricao: 'CONFECCIONADO EM MADEIRA?', selecionado: true },
         { id: 12, descricao: 'ESPECIFICAÇÕES DE QUALIDADE', selecionado: true },
         { id: 13, descricao: 'CERTIFICAÇÕES NECESSÁRIAS', selecionado: false },
@@ -65,7 +65,7 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
       descricao: 'Item - Modelo de Execução',
       icon: '▼',
       expanded: true,
-      attributes: [
+      tiposCapitulo: [
         { id: 16, descricao: 'PRAZO DE ENTREGA DO OBJETO', selecionado: true },
         { id: 17, descricao: 'LOCAL DE ENTREGA', selecionado: false },
         { id: 18, descricao: 'CONDIÇÕES DE ARMAZENAMENTO', selecionado: false },
@@ -76,7 +76,7 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
       descricao: 'Item - Seleção Fornecedor',
       icon: '▼',
       expanded: true,
-      attributes: [
+      tiposCapitulo: [
         { id: 19, descricao: 'HAVERÁ AMOSTRAS', selecionado: true },
         { id: 20, descricao: 'QUALIFICAÇÃO TÉCNICA', selecionado: false },
         { id: 21, descricao: 'CAPACIDADE OPERACIONAL', selecionado: false },
@@ -88,120 +88,120 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
       descricao: 'Item - Critérios de Medição e Pagamento',
       icon: '▼',
       expanded: true,
-      attributes: [
+      tiposCapitulo: [
         { id: 23, descricao: 'CRITÉRIOS DE MEDIÇÃO', selecionado: false },
         { id: 24, descricao: 'FORMA DE PAGAMENTO', selecionado: false },
       ],
     },
   ])
 
-  const attributes = computed<ITipoCapituloDTO[]>(() => {
-    return agrupamentos.value.flatMap((category) => category.attributes)
+  const tiposCapitulo = computed<ITipoCapituloDTO[]>(() => {
+    return agrupamentos.value.flatMap((agrupamento) => agrupamento.tiposCapitulo)
   })
 
   // Getters
-  const totalAttributes = computed(() => attributes.value.length)
+  const totalAtributos = computed(() => tiposCapitulo.value.length)
 
-  const totalSelected = computed(() => attributes.value.filter((attr) => attr.selecionado).length)
+  const totalAtributosSelecionados = computed(() => tiposCapitulo.value.filter((attr) => attr.selecionado).length)
 
-  const totalUnselected = computed(() => totalAttributes.value - totalSelected.value)
+  const totalAtributosNaoSelecionados = computed(() => totalAtributos.value - totalAtributosSelecionados.value)
 
-  const getAttributesByCategory = (categoryId: number) => {
-    const category = agrupamentos.value.find((cat) => cat.id === categoryId)
-    return category ? category.attributes : []
+  const getAtributosPorAgrupamento = (agrupamentoId: number) => {
+    const agrupamento = agrupamentos.value.find((agrupamento) => agrupamento.id === agrupamentoId)
+    return agrupamento ? agrupamento.tiposCapitulo : []
   }
 
-  const getSelectedCountByCategory = (categoryId: number) => {
-    return getAttributesByCategory(categoryId).filter((attr) => attr.selecionado).length
+  const getAtributosSelecionadosPorAgrupamento = (agrupamentoId: number) => {
+    return getAtributosPorAgrupamento(agrupamentoId).filter((atributo) => atributo.selecionado).length
   }
 
-  const getTotalCountByCategory = (categoryId: number) => {
-    return getAttributesByCategory(categoryId).length
+  const getTotalAtributosPorAgrupamento = (agrupamentoId: number) => {
+    return getAtributosPorAgrupamento(agrupamentoId).length
   }
 
-  const getVisibleAttributesByCategory = (categoryId: number) => {
-    let attrs = getAttributesByCategory(categoryId)
+  const getAtributosVisiveisPorAgrupamento = (agrupamentoId: number) => {
+    let attrs = getAtributosPorAgrupamento(agrupamentoId)
 
     // Apply search filter
-    if (searchQuery.value) {
-      const query = searchQuery.value.toLowerCase()
+    if (descricaoPesquisa.value) {
+      const query = descricaoPesquisa.value.toLowerCase()
       attrs = attrs.filter((attr) => attr.descricao.toLowerCase().includes(query))
     }
 
     // Apply selection filter
-    if (filterType.value === 'selecionados') {
+    if (tipoFiltroAtributo.value === 'selecionados') {
       attrs = attrs.filter((attr) => attr.selecionado)
-    } else if (filterType.value === 'naoSelecionados') {
+    } else if (tipoFiltroAtributo.value === 'naoSelecionados') {
       attrs = attrs.filter((attr) => !attr.selecionado)
     }
 
     return attrs
   }
 
-  const getVisibleCountByCategory = (categoryId: number) => {
-    return getVisibleAttributesByCategory(categoryId).length
+  const getTotalAtributosVisiveisPorAgrupamento = (agrupamentoId: number) => {
+    return getAtributosVisiveisPorAgrupamento(agrupamentoId).length
   }
 
-  const isCategoryVisible = (categoryId: number) => {
-    return getVisibleCountByCategory(categoryId) > 0
+  const isAgrupamentoVisivel = (agrupamentoId: number) => {
+    return getTotalAtributosVisiveisPorAgrupamento(agrupamentoId) > 0
   }
 
-  const visibleCategories = computed(() => {
-    return agrupamentos.value.filter((cat) => isCategoryVisible(cat.id))
+  const agrupamentosVisiveis = computed(() => {
+    return agrupamentos.value.filter((cat) => isAgrupamentoVisivel(cat.id))
   })
 
   // Actions
-  const toggleAttribute = (attributeId: number) => {
-    for (const category of agrupamentos.value) {
-      const attr = category.attributes.find((attribute) => attribute.id === attributeId)
-      if (attr) {
-        attr.selecionado = !attr.selecionado
+  const toggleAtributo = (idAtributo: number) => {
+    for (const agrupamento of agrupamentos.value) {
+      const atributo = agrupamento.tiposCapitulo.find((atributo) => atributo.id === idAtributo)
+      if (atributo) {
+        atributo.selecionado = !atributo.selecionado
         return
       }
     }
   }
 
-  const toggleCategory = (categoryId: number) => {
-    const category = agrupamentos.value.find((c) => c.id === categoryId)
-    if (category) {
-      category.expanded = !category.expanded
-      category.icon = category.expanded ? '▼' : '▶'
+  const toggleAgrupamento = (idAgrupamento: number) => {
+    const agrupamento = agrupamentos.value.find((c) => c.id === idAgrupamento)
+    if (agrupamento) {
+      agrupamento.expanded = !agrupamento.expanded
+      agrupamento.icon = agrupamento.expanded ? '▼' : '▶'
     }
   }
 
-  const toggleAllCategories = (expand: boolean) => {
+  const toggleTodosAgrupamentos = (expand: boolean) => {
     agrupamentos.value.forEach((c) => {
       c.expanded = expand
       c.icon = expand ? '▼' : '▶'
     })
   }
 
-  const setSearchQuery = (query: string) => {
-    searchQuery.value = query
+  const setDescricaoPesquisa = (query: string) => {
+    descricaoPesquisa.value = query
   }
 
-  const clearSearch = () => {
-    searchQuery.value = ''
+  const limparPesquisa = () => {
+    descricaoPesquisa.value = ''
   }
 
-  const setFilterType = (type: FilterType) => {
-    filterType.value = type
+  const setTipoFiltroAtributo = (type: TipoFiltroAtributo) => {
+    tipoFiltroAtributo.value = type
   }
 
-  const clearForm = () => {
+  const resetForm = () => {
     termoReferencia.value = {
       titulo: '',
       tipo: 'aquisicao',
     }
     agrupamentos.value.forEach((category) => {
-      category.attributes.forEach((attr) => {
+      category.tiposCapitulo.forEach((attr) => {
         attr.selecionado = false
       })
     })
   }
 
   const submitForm = () => {
-    const selectedAttributes = attributes.value
+    const selectedAttributes = tiposCapitulo.value
       .filter((attr) => attr.selecionado)
       .map((attr) => ({ id: attr.id, descricao: attr.descricao }))
 
@@ -218,31 +218,31 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
   return {
     // State
     termoReferencia,
-    searchQuery,
-    filterType,
+    searchQuery: descricaoPesquisa,
+    filterType: tipoFiltroAtributo,
     categories: agrupamentos,
-    attributes,
+    attributes: tiposCapitulo,
 
     // Getters
-    totalAttributes,
-    totalSelected,
-    totalUnselected,
-    visibleCategories,
-    getAttributesByCategory,
-    getSelectedCountByCategory,
-    getTotalCountByCategory,
-    getVisibleAttributesByCategory,
-    getVisibleCountByCategory,
-    isCategoryVisible,
+    totalAttributes: totalAtributos,
+    totalSelected: totalAtributosSelecionados,
+    totalUnselected: totalAtributosNaoSelecionados,
+    visibleCategories: agrupamentosVisiveis,
+    getAttributesByCategory: getAtributosPorAgrupamento,
+    getSelectedCountByCategory:getAtributosSelecionadosPorAgrupamento,
+    getTotalCountByCategory: getTotalAtributosPorAgrupamento,
+    getVisibleAttributesByCategory: getAtributosVisiveisPorAgrupamento,
+    getVisibleCountByCategory: getTotalAtributosVisiveisPorAgrupamento,
+    isCategoryVisible: isAgrupamentoVisivel,
 
     // Actions
-    toggleAttribute,
-    toggleCategory,
-    toggleAllCategories,
-    setSearchQuery,
-    clearSearch,
-    setFilterType,
-    clearForm,
+    toggleAttribute: toggleAtributo,
+    toggleCategory: toggleAgrupamento,
+    toggleAllCategories: toggleTodosAgrupamentos,
+    setDescricaoPesquisa: setDescricaoPesquisa,
+    limparPesquisa: limparPesquisa,
+    setTipoFiltroAtributo: setTipoFiltroAtributo,
+    resetForm: resetForm,
     submitForm,
   }
 })

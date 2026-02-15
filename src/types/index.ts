@@ -9,10 +9,10 @@ export interface IAgrupamentoAtributoDTO {
   descricao: string
   icon: string
   expanded: boolean
-  attributes: ITipoCapituloDTO[]
+  tiposCapitulo: ITipoCapituloDTO[]
 }
 
-export type FilterType = 'todos' | 'selecionados' | 'naoSelecionados'
+export type TipoFiltroAtributo = 'todos' | 'selecionados' | 'naoSelecionados'
 
 export interface TermoReferencia {
   titulo: string

@@ -40,7 +40,7 @@
       <!-- Search -->
       <div class="search-container">
         <input v-model="store.searchQuery" type="text" class="search-input" placeholder="🔍 Pesquisar atributos...">
-        <button class="clear-button" @click="store.clearSearch">
+        <button class="clear-button" @click="store.limparPesquisa">
           ✕ Limpar
         </button>
       </div>
@@ -120,8 +120,8 @@ const infoMessage = computed(() => {
 });
 
 const resetFilters = () => {
-  store.clearSearch();
-  store.setFilterType('todos');
+  store.limparPesquisa;
+  store.setTipoFiltroAtributo('todos');
 };
 
 const handleSubmit = () => {
@@ -132,7 +132,7 @@ const handleSubmit = () => {
 
 const handleClear = () => {
   if (confirm('Deseja realmente limpar todos os dados?')) {
-    store.clearForm();
+    store.resetForm();
     resetFilters();
   }
 };

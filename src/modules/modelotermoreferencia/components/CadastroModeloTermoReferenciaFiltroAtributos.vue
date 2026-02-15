@@ -36,10 +36,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { FilterType } from '@/types';
+import type { TipoFiltroAtributo } from '@/types';
 
 interface Props {
-    modelValue: FilterType;
+    modelValue: TipoFiltroAtributo;
     totalCount: number;
     selectedCount: number;
     unselectedCount: number;
@@ -48,7 +48,7 @@ interface Props {
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
-    'update:modelValue': [value: FilterType],
+    'update:modelValue': [value: TipoFiltroAtributo],
     'toggle-all': []
 }>();
 
@@ -59,7 +59,7 @@ const toggleAll = () => {
     emit('toggle-all');
 };
 
-const handleChange = (value: FilterType) => {
+const handleChange = (value: TipoFiltroAtributo) => {
     emit('update:modelValue', value);
 };
 </script>
