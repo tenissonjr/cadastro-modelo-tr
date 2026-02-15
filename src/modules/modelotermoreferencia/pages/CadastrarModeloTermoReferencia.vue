@@ -58,7 +58,7 @@
       <!-- Accordion -->
       <div class="accordion-container">
         <cadastro-modelo-termo-referencia-atributos v-for="category in store.visibleCategories" :key="category.id"
-          :category="category" :attributes="store.getAttributesByCategory(category.id)"
+          :category="category"
           :visible-attributes="store.getVisibleAttributesByCategory(category.id)"
           :selected-count="store.getSelectedCountByCategory(category.id)"
           :total-count="store.getTotalCountByCategory(category.id)"

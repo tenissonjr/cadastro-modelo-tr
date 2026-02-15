@@ -1,7 +1,6 @@
 export interface Attribute {
   id: number
   name: string
-  categoryId: number
   selected: boolean
 }
 
@@ -10,6 +9,7 @@ export interface Category {
   name: string
   icon: string
   expanded: boolean
+  attributes: Attribute[]
 }
 
 export type FilterType = 'all' | 'selected' | 'unselected'

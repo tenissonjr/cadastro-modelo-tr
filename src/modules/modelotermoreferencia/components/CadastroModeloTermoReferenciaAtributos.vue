@@ -26,13 +26,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import CadastroModeloTermoReferenciaAtributosItem from './CadastroModeloTermoReferenciaAtributosItem.vue';
 import type { Category, Attribute } from '@/types';
 
 interface Props {
     category: Category;
-    attributes: Attribute[];
     visibleAttributes: Attribute[];
     selectedCount: number;
     totalCount: number;

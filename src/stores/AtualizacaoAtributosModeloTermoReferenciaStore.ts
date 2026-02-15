@@ -13,74 +13,91 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
   const filterType = ref<FilterType>('all')
 
   const categories = ref<Category[]>([
-    { id: 1, name: 'Informações Iniciais', icon: '▼', expanded: true },
-    { id: 2, name: 'Definição do Objeto', icon: '▼', expanded: true },
-    { id: 3, name: 'Fundamentação da Contratação', icon: '▼', expanded: true },
-    { id: 4, name: 'Item - Requisitos', icon: '▼', expanded: true },
-    { id: 5, name: 'Item - Modelo de Execução', icon: '▼', expanded: true },
-    { id: 6, name: 'Item - Seleção Fornecedor', icon: '▼', expanded: true },
+    {
+      id: 1,
+      name: 'Informações Iniciais',
+      icon: '▼',
+      expanded: true,
+      attributes: [
+        { id: 1, name: 'UNIDADES SUPRIDORAS', selected: true },
+        { id: 2, name: 'JUSTIFICATIVA', selected: false },
+        { id: 3, name: 'DESCRIÇÃO DA DEMANDA', selected: false },
+      ],
+    },
+    {
+      id: 2,
+      name: 'Definição do Objeto',
+      icon: '▼',
+      expanded: true,
+      attributes: [
+        { id: 4, name: 'OBJETO', selected: true },
+        { id: 5, name: 'ESPECIFICAÇÕES TÉCNICAS', selected: false },
+        { id: 6, name: 'QUANTITATIVOS', selected: true },
+        { id: 7, name: 'CATÁLOGO DE MATERIAIS', selected: false },
+      ],
+    },
+    {
+      id: 3,
+      name: 'Fundamentação da Contratação',
+      icon: '▼',
+      expanded: true,
+      attributes: [
+        { id: 8, name: 'JUSTIFICATIVA DA CONTRATAÇÃO', selected: true },
+        { id: 9, name: 'ESTUDOS TÉCNICOS PRELIMINARES', selected: false },
+        { id: 10, name: 'ANÁLISE DE RISCOS', selected: false },
+      ],
+    },
+    {
+      id: 4,
+      name: 'Item - Requisitos',
+      icon: '▼',
+      expanded: true,
+      attributes: [
+        { id: 11, name: 'CONFECCIONADO EM MADEIRA?', selected: true },
+        { id: 12, name: 'ESPECIFICAÇÕES DE QUALIDADE', selected: true },
+        { id: 13, name: 'CERTIFICAÇÕES NECESSÁRIAS', selected: false },
+        { id: 14, name: 'GARANTIA MÍNIMA', selected: false },
+        { id: 15, name: 'PRAZO DE VALIDADE', selected: false },
+      ],
+    },
+    {
+      id: 5,
+      name: 'Item - Modelo de Execução',
+      icon: '▼',
+      expanded: true,
+      attributes: [
+        { id: 16, name: 'PRAZO DE ENTREGA DO OBJETO', selected: true },
+        { id: 17, name: 'LOCAL DE ENTREGA', selected: false },
+        { id: 18, name: 'CONDIÇÕES DE ARMAZENAMENTO', selected: false },
+      ],
+    },
+    {
+      id: 6,
+      name: 'Item - Seleção Fornecedor',
+      icon: '▼',
+      expanded: true,
+      attributes: [
+        { id: 19, name: 'HAVERÁ AMOSTRAS', selected: true },
+        { id: 20, name: 'QUALIFICAÇÃO TÉCNICA', selected: false },
+        { id: 21, name: 'CAPACIDADE OPERACIONAL', selected: false },
+        { id: 22, name: 'EXPERIÊNCIA ANTERIOR', selected: false },
+      ],
+    },
     {
       id: 7,
       name: 'Item - Critérios de Medição e Pagamento',
       icon: '▼',
       expanded: true,
+      attributes: [
+        { id: 23, name: 'CRITÉRIOS DE MEDIÇÃO', selected: false },
+        { id: 24, name: 'FORMA DE PAGAMENTO', selected: false },
+      ],
     },
   ])
 
-  const attributes = ref<Attribute[]>([
-    // Informações Iniciais
-    { id: 1, name: 'UNIDADES SUPRIDORAS', categoryId: 1, selected: true },
-    { id: 2, name: 'JUSTIFICATIVA', categoryId: 1, selected: false },
-    { id: 3, name: 'DESCRIÇÃO DA DEMANDA', categoryId: 1, selected: false },
-
-    // Definição do Objeto
-    { id: 4, name: 'OBJETO', categoryId: 2, selected: true },
-    { id: 5, name: 'ESPECIFICAÇÕES TÉCNICAS', categoryId: 2, selected: false },
-    { id: 6, name: 'QUANTITATIVOS', categoryId: 2, selected: true },
-    { id: 7, name: 'CATÁLOGO DE MATERIAIS', categoryId: 2, selected: false },
-
-    // Fundamentação da Contratação
-    {
-      id: 8,
-      name: 'JUSTIFICATIVA DA CONTRATAÇÃO',
-      categoryId: 3,
-      selected: true,
-    },
-    {
-      id: 9,
-      name: 'ESTUDOS TÉCNICOS PRELIMINARES',
-      categoryId: 3,
-      selected: false,
-    },
-    { id: 10, name: 'ANÁLISE DE RISCOS', categoryId: 3, selected: false },
-
-    // Item - Requisitos
-    { id: 11, name: 'CONFECCIONADO EM MADEIRA?', categoryId: 4, selected: true },
-    {
-      id: 12,
-      name: 'ESPECIFICAÇÕES DE QUALIDADE',
-      categoryId: 4,
-      selected: true,
-    },
-    { id: 13, name: 'CERTIFICAÇÕES NECESSÁRIAS', categoryId: 4, selected: false },
-    { id: 14, name: 'GARANTIA MÍNIMA', categoryId: 4, selected: false },
-    { id: 15, name: 'PRAZO DE VALIDADE', categoryId: 4, selected: false },
-
-    // Item - Modelo de Execução
-    { id: 16, name: 'PRAZO DE ENTREGA DO OBJETO', categoryId: 5, selected: true },
-    { id: 17, name: 'LOCAL DE ENTREGA', categoryId: 5, selected: false },
-    { id: 18, name: 'CONDIÇÕES DE ARMAZENAMENTO', categoryId: 5, selected: false },
-
-    // Item - Seleção Fornecedor
-    { id: 19, name: 'HAVERÁ AMOSTRAS', categoryId: 6, selected: true },
-    { id: 20, name: 'QUALIFICAÇÃO TÉCNICA', categoryId: 6, selected: false },
-    { id: 21, name: 'CAPACIDADE OPERACIONAL', categoryId: 6, selected: false },
-    { id: 22, name: 'EXPERIÊNCIA ANTERIOR', categoryId: 6, selected: false },
-
-    // Item - Critérios de Medição e Pagamento
-    { id: 23, name: 'CRITÉRIOS DE MEDIÇÃO', categoryId: 7, selected: false },
-    { id: 24, name: 'FORMA DE PAGAMENTO', categoryId: 7, selected: false },
-  ])
+  const attributes = computed<Attribute[]>(() => {
+    return categories.value.flatMap((category) => category.attributes)
+  })
 
   // Getters
   const totalAttributes = computed(() => attributes.value.length)
@@ -90,15 +107,16 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
   const totalUnselected = computed(() => totalAttributes.value - totalSelected.value)
 
   const getAttributesByCategory = (categoryId: number) => {
-    return attributes.value.filter((attr) => attr.categoryId === categoryId)
+    const category = categories.value.find((cat) => cat.id === categoryId)
+    return category ? category.attributes : []
   }
 
   const getSelectedCountByCategory = (categoryId: number) => {
-    return attributes.value.filter((attr) => attr.categoryId === categoryId && attr.selected).length
+    return getAttributesByCategory(categoryId).filter((attr) => attr.selected).length
   }
 
   const getTotalCountByCategory = (categoryId: number) => {
-    return attributes.value.filter((attr) => attr.categoryId === categoryId).length
+    return getAttributesByCategory(categoryId).length
   }
 
   const getVisibleAttributesByCategory = (categoryId: number) => {
@@ -134,9 +152,12 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
 
   // Actions
   const toggleAttribute = (attributeId: number) => {
-    const attr = attributes.value.find((a) => a.id === attributeId)
-    if (attr) {
-      attr.selected = !attr.selected
+    for (const category of categories.value) {
+      const attr = category.attributes.find((attribute) => attribute.id === attributeId)
+      if (attr) {
+        attr.selected = !attr.selected
+        return
+      }
     }
   }
 
@@ -172,8 +193,10 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
       titulo: '',
       tipo: 'aquisicao',
     }
-    attributes.value.forEach((attr) => {
-      attr.selected = false
+    categories.value.forEach((category) => {
+      category.attributes.forEach((attr) => {
+        attr.selected = false
+      })
     })
   }
 

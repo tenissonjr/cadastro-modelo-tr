@@ -58,7 +58,7 @@
       <!-- Accordion -->
     <app-accordion :value="0">     
         <cadastro-modelo-termo-referencia-atributos2 v-for="category in store.visibleCategories" :key="category.id"
-          :category="category" :attributes="store.getAttributesByCategory(category.id)"
+          :category="category"
           :visible-attributes="store.getVisibleAttributesByCategory(category.id)"
           :selected-count="store.getSelectedCountByCategory(category.id)"
           :total-count="store.getTotalCountByCategory(category.id)"
