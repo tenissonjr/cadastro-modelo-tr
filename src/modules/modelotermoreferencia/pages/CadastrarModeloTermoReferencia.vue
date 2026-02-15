@@ -95,10 +95,10 @@
 <script setup lang="ts">
 import CadastroModeloTermoReferenciaAtributos from '@/modules/modelotermoreferencia/components/CadastroModeloTermoReferenciaAtributos.vue';
 import cadastroModeloTermoReferenciaFiltroAtributos from '@/modules/modelotermoreferencia/components/CadastroModeloTermoReferenciaFiltroAtributos.vue';
-import { useAttributeStore } from '@/stores/attributeStore';
+import { useAtualizacaoAtributosModeloTermoReferenciaStore } from '@/stores/AtualizacaoAtributosModeloTermoReferenciaStore';
 import { computed, ref } from 'vue';
 
-const store = useAttributeStore();
+const store = useAtualizacaoAtributosModeloTermoReferenciaStore();
 const areAllExpanded = ref(true);
 
 function toggleAttributes() {

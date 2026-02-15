@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { Attribute, Category, FilterType, TermoReferencia } from '@/types'
 
-export const useAttributeStore = defineStore('attributes', () => {
+export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('useAtualizacaoAtributosModeloTermoReferenciaStore', () => {
   // State
   const termoReferencia = ref<TermoReferencia>({
     titulo: '',
