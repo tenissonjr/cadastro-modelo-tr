@@ -218,15 +218,15 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
   return {
     // State
     termoReferencia,
-    searchQuery: descricaoPesquisa,
-    filterType: tipoFiltroAtributo,
-    categories: agrupamentos,
-    attributes: tiposCapitulo,
+    descricaoPesquisa,
+    tipoFiltroAtributo,
+    agrupamentos,
+    tiposCapitulo,
 
     // Getters
-    totalAttributes: totalAtributos,
-    totalSelected: totalAtributosSelecionados,
-    totalUnselected: totalAtributosNaoSelecionados,
+    totalAtributos,
+    totalAtributosSelecionados,
+    totalAtributosNaoSelecionados,
     agrupamentosVisiveis,
     getAttributesByCategory: getAtributosPorAgrupamento,
     getAtributosSelecionadosPorAgrupamento,

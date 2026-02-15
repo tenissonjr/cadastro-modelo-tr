@@ -33,21 +33,21 @@
       <div class="section-header">
         <span class="section-title">Atributos</span>
         <span class="total-counter">
-          ({{ store.totalSelected }}/{{ store.totalAttributes }} selecionados)
+          ({{ store.totalAtributosSelecionados }}/{{ store.totalAtributos }} selecionados)
         </span>
       </div>
 
       <!-- Search -->
       <div class="search-container">
-        <input v-model="store.searchQuery" type="text" class="search-input" placeholder="🔍 Pesquisar atributos...">
+        <input v-model="store.descricaoPesquisa" type="text" class="search-input" placeholder="🔍 Pesquisar atributos...">
         <button class="clear-button" @click="store.limparPesquisa">
           ✕ Limpar
         </button>
       </div>
 
       <!-- Filter -->
-      <cadastro-modelo-termo-referencia-filtro-atributos v-model="store.filterType" :total-count="store.totalAttributes"
-        :selected-count="store.totalSelected" :unselected-count="store.totalUnselected"
+      <cadastro-modelo-termo-referencia-filtro-atributos v-model="store.tipoFiltroAtributo" :total-count="store.totalAtributos"
+        :selected-count="store.totalAtributosSelecionados" :unselected-count="store.totalAtributosNaoSelecionados"
         @toggle-all="toggleAttributes" />
 
       <!-- Info Message -->
@@ -63,7 +63,7 @@
           :totalAtributosSelecionados="store.getAtributosSelecionadosPorAgrupamento(agrupamento.id)"
           :totalAtributos="store.getTotalAtributosPorAgrupamento(agrupamento.id)"
           :totalAtributosVisiveis="store.getTotalAtributosVisiveisPorAgrupamento(agrupamento.id)"
-          :is-visible="store.isAgrupamentoVisivel(agrupamento.id)" :descricaoPesquisa="store.searchQuery"
+          :is-visible="store.isAgrupamentoVisivel(agrupamento.id)" :descricaoPesquisa="store.descricaoPesquisa"
           @toggle-category="store.toggleAgrupamento" @toggle-attribute="store.toggleAtributo" />
     </app-accordion>
 
@@ -109,14 +109,14 @@ function toggleAttributes() {
 }
 
 const showInfoMessage = computed(() => {
-  return store.filterType !== 'todos';
+  return store.tipoFiltroAtributo !== 'todos';
 });
 
 const infoMessage = computed(() => {
-  if (store.filterType === 'selecionados') {
-    return `ℹ️ Exibindo apenas atributos selecionados (${store.totalSelected})`;
-  } else if (store.filterType === 'naoSelecionados') {
-    return `ℹ️ Exibindo apenas atributos não selecionados (${store.totalUnselected})`;
+  if (store.tipoFiltroAtributo === 'selecionados') {
+    return `ℹ️ Exibindo apenas atributos selecionados (${store.totalAtributosSelecionados})`;
+  } else if (store.tipoFiltroAtributo === 'naoSelecionados') {
+    return `ℹ️ Exibindo apenas atributos não selecionados (${store.totalAtributosNaoSelecionados})`;
   }
   return '';
 });
