@@ -1,16 +1,16 @@
 <template>
     <div class="attribute-item">
-        <input :id="`attr-${attribute.id}`" type="checkbox" :checked="attribute.selected" @change="handleToggle">
+        <input :id="`attr-${attribute.id}`" type="checkbox" :checked="attribute.selecionado" @change="handleToggle">
         <label :for="`attr-${attribute.id}`" class="attribute-label" v-html="highlightedName"></label>
     </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import type { Attribute } from '@/types';
+import type { ITipoCapituloDTO } from '@/types';
 
 interface Props {
-    attribute: Attribute;
+    attribute: ITipoCapituloDTO;
     searchQuery?: string;
 }
 
@@ -28,11 +28,11 @@ const handleToggle = () => {
 
 const highlightedName = computed(() => {
     if (!props.searchQuery) {
-        return props.attribute.name;
+        return props.attribute.descricao;
     }
 
     const regex = new RegExp(`(${props.searchQuery})`, 'gi');
-    return props.attribute.name.replace(
+    return props.attribute.descricao.replace(
         regex,
         '<span class="search-highlight">$1</span>'
     );

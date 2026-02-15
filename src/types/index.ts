@@ -1,18 +1,18 @@
-export interface Attribute {
+export interface ITipoCapituloDTO {
   id: number
-  name: string
-  selected: boolean
+  descricao: string
+  selecionado: boolean
 }
 
-export interface Category {
+export interface IAgrupamentoAtributoDTO {
   id: number
-  name: string
+  descricao: string
   icon: string
   expanded: boolean
-  attributes: Attribute[]
+  attributes: ITipoCapituloDTO[]
 }
 
-export type FilterType = 'all' | 'selected' | 'unselected'
+export type FilterType = 'todos' | 'selecionados' | 'naoSelecionados'
 
 export interface TermoReferencia {
   titulo: string

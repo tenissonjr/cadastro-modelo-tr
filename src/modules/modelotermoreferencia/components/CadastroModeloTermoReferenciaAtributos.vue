@@ -3,7 +3,7 @@
         <div class="accordion-header" @click="handleToggle">
             <div class="accordion-title">
                 <span class="accordion-icon">{{ category.icon }}</span>
-                {{ category.name }}
+                {{ category.descricao }}
             </div>
             <div class="accordion-badges">
                 <span class="badge badge-total">
@@ -27,11 +27,11 @@
 
 <script setup lang="ts">
 import CadastroModeloTermoReferenciaAtributosItem from './CadastroModeloTermoReferenciaAtributosItem.vue';
-import type { Category, Attribute } from '@/types';
+import type { IAgrupamentoAtributoDTO, ITipoCapituloDTO } from '@/types';
 
 interface Props {
-    category: Category;
-    visibleAttributes: Attribute[];
+    category: IAgrupamentoAtributoDTO;
+    visibleAttributes: ITipoCapituloDTO[];
     selectedCount: number;
     totalCount: number;
     visibleCount: number;

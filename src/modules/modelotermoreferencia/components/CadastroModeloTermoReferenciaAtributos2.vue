@@ -4,7 +4,7 @@
         <app-accordion-header >
 
             <div class="accordion-title">
-                <span>{{ category.name }}</span>
+                <span>{{ category.descricao }}</span>
             </div>
             <div class="accordion-badges">
                 <span class="badge badge-total">📊 {{ visibleCount }}{{ visibleCount !== totalCount ? ` de ${totalCount}` : '' }} {{ totalCount === 1 ? 'atributo' : 'atributos' }}</span>
@@ -19,11 +19,11 @@
 
 <script setup lang="ts">
 import CadastroModeloTermoReferenciaAtributosItem2 from './CadastroModeloTermoReferenciaAtributosItem2.vue';
-import type { Category, Attribute } from '@/types';
+import type { IAgrupamentoAtributoDTO, ITipoCapituloDTO } from '@/types';
 
 interface Props {
-    category: Category;
-    visibleAttributes: Attribute[];
+    category: IAgrupamentoAtributoDTO;
+    visibleAttributes: ITipoCapituloDTO[];
     selectedCount: number;
     totalCount: number;
     visibleCount: number;

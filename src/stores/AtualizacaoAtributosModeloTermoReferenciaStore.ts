@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { Attribute, Category, FilterType, TermoReferencia } from '@/types'
+import type { ITipoCapituloDTO, IAgrupamentoAtributoDTO, FilterType, TermoReferencia } from '@/types'
 
 export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('useAtualizacaoAtributosModeloTermoReferenciaStore', () => {
   // State
@@ -10,99 +10,99 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
   })
 
   const searchQuery = ref('')
-  const filterType = ref<FilterType>('all')
+  const filterType = ref<FilterType>('todos')
 
-  const categories = ref<Category[]>([
+  const categories = ref<IAgrupamentoAtributoDTO[]>([
     {
       id: 1,
-      name: 'Informações Iniciais',
+      descricao: 'Informações Iniciais',
       icon: '▼',
       expanded: true,
       attributes: [
-        { id: 1, name: 'UNIDADES SUPRIDORAS', selected: true },
-        { id: 2, name: 'JUSTIFICATIVA', selected: false },
-        { id: 3, name: 'DESCRIÇÃO DA DEMANDA', selected: false },
+        { id: 1, descricao: 'UNIDADES SUPRIDORAS', selecionado: true },
+        { id: 2, descricao: 'JUSTIFICATIVA', selecionado: false },
+        { id: 3, descricao: 'DESCRIÇÃO DA DEMANDA', selecionado: false },
       ],
     },
     {
       id: 2,
-      name: 'Definição do Objeto',
+      descricao: 'Definição do Objeto',
       icon: '▼',
       expanded: true,
       attributes: [
-        { id: 4, name: 'OBJETO', selected: true },
-        { id: 5, name: 'ESPECIFICAÇÕES TÉCNICAS', selected: false },
-        { id: 6, name: 'QUANTITATIVOS', selected: true },
-        { id: 7, name: 'CATÁLOGO DE MATERIAIS', selected: false },
+        { id: 4, descricao: 'OBJETO', selecionado: true },
+        { id: 5, descricao: 'ESPECIFICAÇÕES TÉCNICAS', selecionado: false },
+        { id: 6, descricao: 'QUANTITATIVOS', selecionado: true },
+        { id: 7, descricao: 'CATÁLOGO DE MATERIAIS', selecionado: false },
       ],
     },
     {
       id: 3,
-      name: 'Fundamentação da Contratação',
+      descricao: 'Fundamentação da Contratação',
       icon: '▼',
       expanded: true,
       attributes: [
-        { id: 8, name: 'JUSTIFICATIVA DA CONTRATAÇÃO', selected: true },
-        { id: 9, name: 'ESTUDOS TÉCNICOS PRELIMINARES', selected: false },
-        { id: 10, name: 'ANÁLISE DE RISCOS', selected: false },
+        { id: 8, descricao: 'JUSTIFICATIVA DA CONTRATAÇÃO', selecionado: true },
+        { id: 9, descricao: 'ESTUDOS TÉCNICOS PRELIMINARES', selecionado: false },
+        { id: 10, descricao: 'ANÁLISE DE RISCOS', selecionado: false },
       ],
     },
     {
       id: 4,
-      name: 'Item - Requisitos',
+      descricao: 'Item - Requisitos',
       icon: '▼',
       expanded: true,
       attributes: [
-        { id: 11, name: 'CONFECCIONADO EM MADEIRA?', selected: true },
-        { id: 12, name: 'ESPECIFICAÇÕES DE QUALIDADE', selected: true },
-        { id: 13, name: 'CERTIFICAÇÕES NECESSÁRIAS', selected: false },
-        { id: 14, name: 'GARANTIA MÍNIMA', selected: false },
-        { id: 15, name: 'PRAZO DE VALIDADE', selected: false },
+        { id: 11, descricao: 'CONFECCIONADO EM MADEIRA?', selecionado: true },
+        { id: 12, descricao: 'ESPECIFICAÇÕES DE QUALIDADE', selecionado: true },
+        { id: 13, descricao: 'CERTIFICAÇÕES NECESSÁRIAS', selecionado: false },
+        { id: 14, descricao: 'GARANTIA MÍNIMA', selecionado: false },
+        { id: 15, descricao: 'PRAZO DE VALIDADE', selecionado: false },
       ],
     },
     {
       id: 5,
-      name: 'Item - Modelo de Execução',
+      descricao: 'Item - Modelo de Execução',
       icon: '▼',
       expanded: true,
       attributes: [
-        { id: 16, name: 'PRAZO DE ENTREGA DO OBJETO', selected: true },
-        { id: 17, name: 'LOCAL DE ENTREGA', selected: false },
-        { id: 18, name: 'CONDIÇÕES DE ARMAZENAMENTO', selected: false },
+        { id: 16, descricao: 'PRAZO DE ENTREGA DO OBJETO', selecionado: true },
+        { id: 17, descricao: 'LOCAL DE ENTREGA', selecionado: false },
+        { id: 18, descricao: 'CONDIÇÕES DE ARMAZENAMENTO', selecionado: false },
       ],
     },
     {
       id: 6,
-      name: 'Item - Seleção Fornecedor',
+      descricao: 'Item - Seleção Fornecedor',
       icon: '▼',
       expanded: true,
       attributes: [
-        { id: 19, name: 'HAVERÁ AMOSTRAS', selected: true },
-        { id: 20, name: 'QUALIFICAÇÃO TÉCNICA', selected: false },
-        { id: 21, name: 'CAPACIDADE OPERACIONAL', selected: false },
-        { id: 22, name: 'EXPERIÊNCIA ANTERIOR', selected: false },
+        { id: 19, descricao: 'HAVERÁ AMOSTRAS', selecionado: true },
+        { id: 20, descricao: 'QUALIFICAÇÃO TÉCNICA', selecionado: false },
+        { id: 21, descricao: 'CAPACIDADE OPERACIONAL', selecionado: false },
+        { id: 22, descricao: 'EXPERIÊNCIA ANTERIOR', selecionado: false },
       ],
     },
     {
       id: 7,
-      name: 'Item - Critérios de Medição e Pagamento',
+      descricao: 'Item - Critérios de Medição e Pagamento',
       icon: '▼',
       expanded: true,
       attributes: [
-        { id: 23, name: 'CRITÉRIOS DE MEDIÇÃO', selected: false },
-        { id: 24, name: 'FORMA DE PAGAMENTO', selected: false },
+        { id: 23, descricao: 'CRITÉRIOS DE MEDIÇÃO', selecionado: false },
+        { id: 24, descricao: 'FORMA DE PAGAMENTO', selecionado: false },
       ],
     },
   ])
 
-  const attributes = computed<Attribute[]>(() => {
+  const attributes = computed<ITipoCapituloDTO[]>(() => {
     return categories.value.flatMap((category) => category.attributes)
   })
 
   // Getters
   const totalAttributes = computed(() => attributes.value.length)
 
-  const totalSelected = computed(() => attributes.value.filter((attr) => attr.selected).length)
+  const totalSelected = computed(() => attributes.value.filter((attr) => attr.selecionado).length)
 
   const totalUnselected = computed(() => totalAttributes.value - totalSelected.value)
 
@@ -112,7 +112,7 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
   }
 
   const getSelectedCountByCategory = (categoryId: number) => {
-    return getAttributesByCategory(categoryId).filter((attr) => attr.selected).length
+    return getAttributesByCategory(categoryId).filter((attr) => attr.selecionado).length
   }
 
   const getTotalCountByCategory = (categoryId: number) => {
@@ -125,14 +125,14 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
     // Apply search filter
     if (searchQuery.value) {
       const query = searchQuery.value.toLowerCase()
-      attrs = attrs.filter((attr) => attr.name.toLowerCase().includes(query))
+      attrs = attrs.filter((attr) => attr.descricao.toLowerCase().includes(query))
     }
 
     // Apply selection filter
-    if (filterType.value === 'selected') {
-      attrs = attrs.filter((attr) => attr.selected)
-    } else if (filterType.value === 'unselected') {
-      attrs = attrs.filter((attr) => !attr.selected)
+    if (filterType.value === 'selecionados') {
+      attrs = attrs.filter((attr) => attr.selecionado)
+    } else if (filterType.value === 'naoSelecionados') {
+      attrs = attrs.filter((attr) => !attr.selecionado)
     }
 
     return attrs
@@ -155,7 +155,7 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
     for (const category of categories.value) {
       const attr = category.attributes.find((attribute) => attribute.id === attributeId)
       if (attr) {
-        attr.selected = !attr.selected
+        attr.selecionado = !attr.selecionado
         return
       }
     }
@@ -195,15 +195,15 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
     }
     categories.value.forEach((category) => {
       category.attributes.forEach((attr) => {
-        attr.selected = false
+        attr.selecionado = false
       })
     })
   }
 
   const submitForm = () => {
     const selectedAttributes = attributes.value
-      .filter((attr) => attr.selected)
-      .map((attr) => ({ id: attr.id, name: attr.name }))
+      .filter((attr) => attr.selecionado)
+      .map((attr) => ({ id: attr.id, descricao: attr.descricao }))
 
     const formData = {
       ...termoReferencia.value,
