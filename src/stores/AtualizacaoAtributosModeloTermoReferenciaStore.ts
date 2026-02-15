@@ -228,7 +228,7 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
     totalAtributosSelecionados,
     totalAtributosNaoSelecionados,
     agrupamentosVisiveis,
-    getAttributesByCategory: getAtributosPorAgrupamento,
+    getAtributosPorAgrupamento,
     getAtributosSelecionadosPorAgrupamento,
     getTotalAtributosPorAgrupamento,
     getAtributosVisiveisPorAgrupamento,
@@ -238,11 +238,11 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
     // Actions
     toggleAtributo,
     toggleAgrupamento,
-    toggleAllCategories: toggleTodosAgrupamentos,
-    setDescricaoPesquisa: setDescricaoPesquisa,
-    limparPesquisa: limparPesquisa,
-    setTipoFiltroAtributo: setTipoFiltroAtributo,
-    resetForm: resetForm,
+    toggleTodosAgrupamentos,
+    setDescricaoPesquisa,
+    limparPesquisa,
+    setTipoFiltroAtributo,
+    resetForm,
     submitForm,
   }
 })

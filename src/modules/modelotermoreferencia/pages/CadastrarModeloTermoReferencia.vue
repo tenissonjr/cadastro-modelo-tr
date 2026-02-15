@@ -103,7 +103,7 @@ const areAllExpanded = ref(true);
 
 function toggleAttributes() {
   areAllExpanded.value = !areAllExpanded.value;
-  store.toggleAllCategories(areAllExpanded.value);
+  store.toggleTodosAgrupamentos(areAllExpanded.value);
 }
 
 const showInfoMessage = computed(() => {
