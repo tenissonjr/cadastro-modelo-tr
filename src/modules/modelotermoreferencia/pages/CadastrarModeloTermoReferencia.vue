@@ -65,7 +65,7 @@
           :totalAtributos="store.getTotalAtributosPorAgrupamento(agrupamento.id)"
           :totalAtributosVisiveis="store.getTotalAtributosVisiveisPorAgrupamento(agrupamento.id)"
           :is-visible="store.isAgrupamentoVisivel(agrupamento.id)" :descricaoPesquisa="store.descricaoPesquisa"
-          @toggle-category="store.toggleAgrupamento" @toggle-attribute="store.toggleAtributo" />
+          @toggle-agrupamento="store.toggleAgrupamento" @toggle-atributo="store.toggleAtributo" />
       </div>
 
       <!-- No Results -->
