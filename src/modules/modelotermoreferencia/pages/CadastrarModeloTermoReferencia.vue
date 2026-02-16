@@ -46,9 +46,8 @@
       </div>
 
       <!-- Filter -->
-      <atualizacao-modelo-termo-referencia-form-filtro-atributos v-model="store.tipoFiltroAtributo" :totalAtributos="store.totalAtributos"
-        :atributosSelecionados="store.totalAtributosSelecionados" 
-        :atributosNaoSelecionados="store.totalAtributosNaoSelecionados"
+      <atualizacao-modelo-termo-referencia-form-filtro-atributos 
+        :isTodosAgrupamentosExpandidos="isTodosAgrupamentosExpandidos"
         @toggle-all="toggleAttributes" />
 
       <!-- Info Message -->
@@ -100,11 +99,11 @@ import { useAtualizacaoAtributosModeloTermoReferenciaStore } from '@/stores/Atua
 import { computed, ref } from 'vue';
 
 const store = useAtualizacaoAtributosModeloTermoReferenciaStore();
-const areAllExpanded = ref(true);
+const isTodosAgrupamentosExpandidos = ref(true);
 
 function toggleAttributes() {
-  areAllExpanded.value = !areAllExpanded.value;
-  store.toggleTodosAgrupamentos(areAllExpanded.value);
+  isTodosAgrupamentosExpandidos.value = !isTodosAgrupamentosExpandidos.value;
+  store.toggleTodosAgrupamentos(isTodosAgrupamentosExpandidos.value);
 }
 
 const showInfoMessage = computed(() => {

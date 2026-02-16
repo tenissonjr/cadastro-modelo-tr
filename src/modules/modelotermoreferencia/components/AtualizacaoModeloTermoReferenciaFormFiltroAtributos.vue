@@ -4,30 +4,30 @@
             <span class="filter-label">Exibir:</span>
 
             <label class="radio-option">
-                <input type="radio" name="filter" value="todos" :checked="modelValue === 'todos'"
-                    @change="handleChange('todos')">
+                <input type="radio" name="filter" value="todos" 
+                    v-model="store.tipoFiltroAtributo">
                 <span class="radio-label">
-                    Todos atributos <span class="count">({{ totalAtributos }})</span>
+                    Todos atributos <span class="count">({{ store.totalAtributos }})</span>
                 </span>
             </label>
 
             <label class="radio-option">
-                <input type="radio" name="filter" value="selecionados" :checked="modelValue === 'selecionados'"
-                    @change="handleChange('selecionados')">
+                <input type="radio" name="filter" value="selecionados" 
+                    v-model="store.tipoFiltroAtributo">
                 <span class="radio-label">
-                    Atributos vinculados <span class="count">({{ atributosSelecionados }})</span>
+                    Atributos vinculados <span class="count">({{ store.totalAtributosSelecionados }})</span>
                 </span>
             </label>
 
             <label class="radio-option">
-                <input type="radio" name="filter" value="naoSelecionados" :checked="modelValue === 'naoSelecionados'"
-                    @change="handleChange('naoSelecionados')">
+                <input type="radio" name="filter" value="naoSelecionados" 
+                    v-model="store.tipoFiltroAtributo">
                 <span class="radio-label">
-                    Atributos não vinculados <span class="count">({{ atributosNaoSelecionados }})</span>
+                    Atributos não vinculados <span class="count">({{ store.totalAtributosNaoSelecionados }})</span>
                 </span>
             </label>
         </div>
-        <button class="toggle-button" :class="{ 'active': isTodosAgrupamentosExpandidos }" @click="toggleAll">
+        <button class="toggle-button" :class="{ 'active': isTodosAgrupamentosExpandidos }" @click="emit('toggle-all')">
             <span class="icon">{{ isTodosAgrupamentosExpandidos ? '🔼' : '🔽' }}</span>
             <span class="text">{{ isTodosAgrupamentosExpandidos ? 'Recolher Todos' : 'Expandir Todos' }}</span>
         </button>
@@ -35,33 +35,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import type { TipoFiltroAtributo } from '@/types';
+import { useAtualizacaoAtributosModeloTermoReferenciaStore } from '@/stores/AtualizacaoAtributosModeloTermoReferenciaStore';
+
+
+const store = useAtualizacaoAtributosModeloTermoReferenciaStore();
+
 
 interface Props {
-    modelValue: TipoFiltroAtributo;
-    totalAtributos: number;
-    atributosSelecionados: number;
-    atributosNaoSelecionados: number;
+    isTodosAgrupamentosExpandidos: boolean;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 
 const emit = defineEmits<{
-    'update:modelValue': [value: TipoFiltroAtributo],
     'toggle-all': []
 }>();
 
-const isTodosAgrupamentosExpandidos = ref(true);
-
-const toggleAll = () => {
-    isTodosAgrupamentosExpandidos.value = !isTodosAgrupamentosExpandidos.value;
-    emit('toggle-all');
-};
-
-const handleChange = (value: TipoFiltroAtributo) => {
-    emit('update:modelValue', value);
-};
 </script>
 
 <style scoped>

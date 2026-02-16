@@ -2,7 +2,7 @@
     <div v-if="isVisible" class="accordion-item">
         <div class="accordion-header" @click="handleToggle">
             <div class="accordion-title">
-                <span class="accordion-icon">{{ agrupamentos.icon }}</span>
+                <span class="accordion-icon">{{ agrupamentos.expanded ? '▼' : '▶' }}</span>
                 {{ agrupamentos.descricao }}
             </div>
             <div class="accordion-badges">

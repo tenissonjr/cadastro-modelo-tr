@@ -7,7 +7,6 @@ export interface ITipoCapituloDTO {
 export interface IAgrupamentoAtributoDTO {
   id: number
   descricao: string
-  icon: string
   expanded: boolean
   tiposCapitulo: ITipoCapituloDTO[]
 }
