@@ -75,9 +75,9 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
     const resultado = new Map<number, ITipoCapituloDTO[]>()
 
     for (const agrupamento of agrupamentos.value) {
-      const atributos = agrupamento.tiposCapitulo.filter((attr) => {
-        const matchesBusca = !query || attr.descricao.toLowerCase().includes(query)
-        const matchesSelecao = matchesFiltro(attr.selecionado)
+      const atributos = agrupamento.tiposCapitulo.filter((atributo) => {
+        const matchesBusca = !query || atributo.descricao.toLowerCase().includes(query)
+        const matchesSelecao = matchesFiltro(atributo.selecionado)
 
         return matchesBusca && matchesSelecao
       })
@@ -131,16 +131,16 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
     })
   }
 
-  const setDescricaoPesquisa = (query: string) => {
-    descricaoPesquisa.value = query
+  const setDescricaoPesquisa = (descricaoPesquisaParam: string) => {
+    descricaoPesquisa.value = descricaoPesquisaParam
   }
 
   const limparPesquisa = () => {
     descricaoPesquisa.value = ''
   }
 
-  const setTipoFiltroAtributo = (type: TipoFiltroAtributo) => {
-    tipoFiltroAtributo.value = type
+  const setTipoFiltroAtributo = (tipoFiltroAtributoParam: TipoFiltroAtributo) => {
+    tipoFiltroAtributo.value = tipoFiltroAtributoParam
   }
 
   const resetForm = () => {
@@ -154,8 +154,8 @@ export const useAtualizacaoAtributosModeloTermoReferenciaStore = defineStore('us
 
   const buildSubmitPayload = (): SubmitFormPayload => {
     const attributes = tiposCapitulo.value
-      .filter((attr) => attr.selecionado)
-      .map((attr) => ({ id: attr.id, descricao: attr.descricao }))
+      .filter((atributo) => atributo.selecionado)
+      .map((atributo) => ({ id: atributo.id, descricao: atributo.descricao }))
 
     return {
       ...termoReferencia.value,
